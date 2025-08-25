@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TravelSphere Hub — Destinations</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header alt">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html">
+        <img src="logo.svg" alt="TravelSphere Hub logo" class="logo-img">
+        <span class="brand-text">TravelSphere Hub</span>
+      </a>
+      <button class="nav-toggle" id="navToggle2" aria-label="Open navigation">☰</button>
+      <nav class="nav" id="mainNav2">
+        <a href="#trending">Trending</a>
+        <a href="#favourites">Favourites</a>
+        <a href="#offers">Offers</a>
+        <a href="index.html">Back to Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="trending" class="container section-top fade-up">
+      <h2>Trending Destinations</h2>
+      <div class="dest-grid" id="trendingGrid">
+        <!-- Cards are inserted in HTML for demo; JS wires favorites & share behavior -->
+        <article class="card" data-id="paris">
+          <img src="https://source.unsplash.com/600x400/?paris" alt="Paris">
+          <div class="card-body">
+            <h3>Paris, France</h3>
+            <p>City of lights, pastries and culture.</p>
+            <div class="card-actions">
+              <button class="icon-btn favorite-btn" aria-label="Add to favourites">♡</button>
+              <button class="icon-btn share-btn" aria-label="Share">⇪</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-id="maldives">
+          <img src="https://source.unsplash.com/600x400/?maldives" alt="Maldives">
+          <div class="card-body">
+            <h3>Maldives</h3>
+            <p>Turquoise waters and island resorts.</p>
+            <div class="card-actions">
+              <button class="icon-btn favorite-btn">♡</button>
+              <button class="icon-btn share-btn">⇪</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-id="tokyo">
+          <img src="https://source.unsplash.com/600x400/?tokyo" alt="Tokyo">
+          <div class="card-body">
+            <h3>Tokyo, Japan</h3>
+            <p>Vibrant, modern and steeped in tradition.</p>
+            <div class="card-actions">
+              <button class="icon-btn favorite-btn">♡</button>
+              <button class="icon-btn share-btn">⇪</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-id="bali">
+          <img src="https://source.unsplash.com/600x400/?bali" alt="Bali">
+          <div class="card-body">
+            <h3>Bali, Indonesia</h3>
+            <p>Beaches, culture and yoga retreats.</p>
+            <div class="card-actions">
+              <button class="icon-btn favorite-btn">♡</button>
+              <button class="icon-btn share-btn">⇪</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="favourites" class="container section-top fade-up">
+      <h2>Your Favourites</h2>
+      <p class="empty-msg" id="favEmpty">You haven't added any favourites yet.</p>
+      <div class="dest-grid" id="favGrid"></div>
+    </section>
+
+    <section id="offers" class="container section-top fade-up">
+      <h2>Special Offers</h2>
+      <div class="offers-grid">
+        <article class="offer-card">
+          <h3>Bali Relax Package</h3>
+          <p>4 nights • Price from $399 • Save 20%</p>
+        </article>
+        <article class="offer-card">
+          <h3>European Classics</h3>
+          <p>7 nights across Paris & Rome • Price from $749 • Early-bird 15% off</p>
+        </article>
+        <article class="offer-card">
+          <h3>Dubai Weekend</h3>
+          <p>3 nights • Price from $299 • Includes desert safari</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 TravelSphere Hub • Made with ♥</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
