@@ -1,33 +1,194 @@
-
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Contact — TravelSphere Hub</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #add2ea;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .site-header {
+      background: #0077b6;
+      padding: 15px 20px;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 0 20px;
+    }
+    .nav-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+    }
+    .brand img {
+      height: 35px;
+      margin-right: 10px;
+    }
+    .nav {
+      display: flex;
+      gap: 20px;
+    }
+    .nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .nav a:hover {
+      color: #90e0ef;
+    }
+
+    /* Floating Emojis */
+    .floating {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0.7;
+      animation: float 8s infinite;
+      z-index: 0;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+      50% { transform: translateY(-50px) rotate(20deg); opacity: 1; }
+      100% { transform: translateY(0px) rotate(-20deg); opacity: 0.6; }
+    }
+
+    /* Main Contact Section */
+    main {
+      position: relative;
+      z-index: 1;
+      padding: 50px 20px;
+      text-align: center;
+      animation: fadeIn 1.5s ease;
+    }
+    main h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #0077b6;
+    }
+    main p {
+      font-size: 1.1rem;
+    }
+
+    /* Contact Form */
+    .contact-form {
+      background: rgba(255,255,255,0.9);
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: slideUp 1s ease;
+    }
+    .contact-form label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      text-align: left;
+    }
+    .contact-form input, 
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+    .contact-form input:focus, 
+    .contact-form textarea:focus {
+      border-color: #0077b6;
+      box-shadow: 0 0 8px #90e0ef;
+      outline: none;
+    }
+    .contact-form button {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      background: #0077b6;
+      color: white;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .contact-form button:hover {
+      background: #023e8a;
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    .site-footer {
+      background: #0077b6;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9rem;
+      margin-top: 40px;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
+  <!-- Floating Emojis -->
+  <div class="floating" style="left: 10%; top: 20%;">✉️</div>
+  <div class="floating" style="left: 80%; top: 30%; animation-delay: 2s;">📞</div>
+  <div class="floating" style="left: 20%; top: 70%; animation-delay: 4s;">📍</div>
+  <div class="floating" style="left: 70%; top: 60%; animation-delay: 6s;">🌍</div>
+  <div class="floating" style="left: 50%; top: 10%; animation-delay: 3s;">📅</div>
+
+  <!-- Navbar -->
   <header class="site-header">
     <div class="container nav-wrap">
       <a class="brand" href="index.html">
-        <img src="logo.svg" alt="logo" class="logo-img">
+        <img src="logo.svg" alt="logo">
         <span class="brand-text">TravelSphere Hub</span>
       </a>
-      <button class="nav-toggle" id="navToggle5">☰</button>
-      <nav class="nav" id="mainNav5">
+      <nav class="nav">
         <a href="index.html">Home</a>
-        <a href="destinations.html">Destinations</a>
+        <a href="destination.html">Destinations</a>
         <a href="about.html">About</a>
       </nav>
     </div>
   </header>
 
-  <main class="container section-top fade-up">
+  <!-- Main Contact -->
+  <main class="container">
     <h1>Contact Us</h1>
-    <p>Email: hello@travelspherehub.com</p>
-    <p>Phone: +91 98765 43210</p>
-    <br>
+    <p>📧 Email: hello@travelspherehub.com</p>
+    <p>📞 Phone: +91 98765 43210</p>
+
     <form class="contact-form">
       <label>Name</label>
       <input type="text" placeholder="Your name" required>
@@ -35,23 +196,27 @@
       <label>Email</label>
       <input type="email" placeholder="you@example.com" required>
 
-       <label>Contact Number</label>
-      <input type="number" placeholder="+91 86703xxxxx" required>
+      <label>Contact Number</label>
+      <input type="tel" placeholder="+91 86703xxxxx" required>
+
+      <label>Date of Travel</label>
+      <input type="date" required>
+
+      <label>Destination</label>
+      <input type="text" placeholder="Where do you want to go?" required>
 
       <label>Message</label>
-      <textarea placeholder="Tell us about your trip or ask a question" rows="6" required></textarea>
+      <textarea placeholder="Tell us about your trip or ask a question" rows="5" required></textarea>
 
-      <button class="btn primary-btn" type="submit">Send Message</button>
+      <button type="submit">Send Message</button>
     </form>
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <p>© 2025 TravelSphere Hub</p>
     </div>
   </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
-
