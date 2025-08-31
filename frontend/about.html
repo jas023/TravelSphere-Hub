@@ -1,48 +1,130 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>About — TravelSphere Hub</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - TravelSphere Hub</title>
+  <style>
+    /* ---------- RESET ---------- */
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {font-family: Arial, sans-serif; line-height:1.6; background:#9ab6d3; color:#333;}
+
+    /* ---------- NAVBAR ---------- */
+    header {
+      background:#395a77;
+      color:#fff;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+    header nav {
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .logo {font-size:1.5rem; font-weight:bold;}
+    nav ul {list-style:none; display:flex; gap:1.2rem;}
+    nav ul li a {
+      color:#fff; text-decoration:none; font-weight:500; transition:0.3s;
+    }
+    nav ul li a:hover {color:#ffcc29;}
+
+     h1 {position:relative; font-size:2.5rem; z-index:1; margin-top: 60px;}
+
+    /* ---------- ABOUT SECTION ---------- */
+    .about-container {
+      max-width:900px; margin:3rem auto; padding:2rem; background:#fff;
+      border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.1);
+    }
+    .about-container h2 {text-align:center; font-size:2rem; margin-bottom:1rem; color:#1e3d59;}
+    .about-container p {margin-bottom:1rem; text-align:justify;}
+    .values {
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+      gap:1.5rem; margin-top:2rem;
+    }
+    .value-box {
+      background:#f0f4f8; padding:1.5rem; border-radius:8px; text-align:center;
+      transition:transform 0.3s;
+    }
+    .value-box:hover {transform:translateY(-5px);}
+    .value-box h3 {margin-bottom:0.5rem; color:#1e3d59;}
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      background:#42698b; color:#fff; text-align:center;
+      padding:0.7rem; font-size:0.9rem; margin-top:2rem;
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container nav-wrap">
-      <a class="brand" href="index.html">
-        <img src="logo.svg" alt="logo" class="logo-img">
-        <span class="brand-text">TravelSphere Hub</span>
-      </a>
-      <button class="nav-toggle" id="navToggle4">☰</button>
-      <nav class="nav" id="mainNav4">
-        <a href="index.html">Home</a>
-        <a href="destinations.html">Destinations</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </div>
+
+  <!-- NAVBAR -->
+  <header>
+    <nav>
+      <div class="logo">TravelSphere Hub</div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" style="color:#ffcc29;">About</a></li>
+        <li><a href="destination.html">Destinations</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
   </header>
+    
+   <h1 style="text-align: center;">About Us</h1>
+  <!-- ABOUT SECTION -->
+  <section class="about-container">
+    
+    <h2>Who We Are</h2>
+    <p>
+      At <strong>TravelSphere Hub</strong>, we believe travel is more than just visiting places — it’s about creating
+      meaningful memories, discovering new cultures, and experiencing the world in its purest form. 
+    </p>
+    <p>
+      Our mission is to connect passionate travelers with destinations that inspire, excite, and transform. 
+      Whether you seek adventure, relaxation, or cultural exploration, we craft journeys tailored to your dreams.
+    </p>
 
-  <main class="container section-top fade-up">
-    <h1>About TravelSphere Hub</h1>
-    <!-- <p>TravelSphere Hub is created with the idea of making travel easy: curated suggestions, transparent offers and friendly support. Our goals:</p>
-    <ul> -->
-      <!-- <li><strong>Inspire:</strong> Show beautiful places and tell real stories.</li>
-      <li><strong>Guide:</strong> Provide clear practical info so planning is stress-free.</li>
-      <li><strong>Value:</strong> Highlight honest deals that respect travellers' budgets.</li>
-    </ul> -->
-    <p>Travel not to escape life, but so life doesn’t escape you.
-
-Life feels dull when every day is the same. Traveling brings back the thrill — the stories, the laughter, and the moments you’ll never forget. At TravelSphere Hub, we turn your journeys into unforgettable adventures, crafted with care and excitement. You dream it, we make it real.
-
-We’re passionate explorers, sharing the best destinations, insider tips, and travel deals to make your every trip truly worth remembering.</p>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>© 2025 TravelSphere Hub</p>
+    <!-- OUR VALUES -->
+    <div class="values">
+      <div class="value-box">
+        <h3>🌍 Authentic Experiences</h3>
+        <p>Travel like a local, not a tourist. We focus on genuine and enriching encounters.</p>
+      </div>
+      <div class="value-box">
+        <h3>🤝 Customer First</h3>
+        <p>Your satisfaction is our priority — we personalize every detail of your journey.</p>
+      </div>
+      <div class="value-box">
+        <h3>♻️ Sustainability</h3>
+        <p>We promote eco-friendly travel to preserve the beauty of destinations for future generations.</p>
+      </div>
+      <div class="value-box">
+        <h3>✨ Innovation</h3>
+        <p>We blend technology with passion to make your travel planning seamless and exciting.</p>
+      </div>
+      <div class="value-box">
+      <h3> 💸Affordable Deals</h3>
+      <p>Exclusive discounts and travel packages that fit your budget.</p>
     </div>
+    <div class="value-box">
+      <h3>🧭 Expert Guidance</h3>
+      <p>Travel tips and local insights for a smooth journey.</p>
+    </div>
+    <div class="value-box">
+      <h3>⏰ 24/7 Support</h3>
+      <p>Always available to assist you during your trips.</p>
+    </div>
+    <div class="value-box">
+      <h3>📸 Memorable Journeys</h3>
+      <p>Unique experiences crafted for lifelong memories.</p>
+    </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 TravelSphere Hub | All Rights Reserved</p>
   </footer>
 
-  <script src="script.js"></script>
 </body>
 </html>
