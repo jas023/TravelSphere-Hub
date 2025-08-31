@@ -1,75 +1,196 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>TravelSphere Hub — Home</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TravelSphere Hub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* General body */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #e6f2ff; /* Light blue shade */
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Navbar */
+    .custom-navbar {
+      background-color: #19528b; /* Dark navy for better contrast */
+      padding: 12px 25px;
+    }
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white !important;
+      padding-left: 15px;
+    }
+    .nav-link {
+      color: white !important;
+      margin-left: 15px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover {
+      color: #ffcc00 !important; /* Highlight on hover */
+    }
+
+    /* Parallax sections */
+    .parallax {
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+    .bg1 {background-image: url("travel1.jpg");}
+    .bg2 {background-image: url("travel2.jpg");}
+    <!-- .bg3 {background-image: url("travel3.jpg");} -->
+    .parallax .content {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 2rem;
+      border-radius: 10px;
+    }
+
+    /* Destinations */
+    .destinations {
+      padding: 3rem 1rem;
+      text-align: center;
+      background: #fff;
+    }
+    .destinations h2 {margin-bottom: 2rem; color:#003366;}
+    .cards {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .card {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      width: 250px;
+    }
+    .card img {
+      width: 100%; border-radius: 8px; margin-bottom: 1rem;
+    }
+    .explore-more {margin-top:2rem;}
+    .explore-btn {
+      background:#003366; color:white; padding:0.7rem 1.5rem;
+      text-decoration:none; border-radius:6px; transition:0.3s;
+    }
+    .explore-btn:hover {background:#ffcc00; color:#003366;}
+
+    /* About section on home */
+    .about-home {
+      background: rgba(129, 127, 127, 0.9);
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 700px;
+      margin: auto;
+    }
+    .about-home h2 {color:#003366; margin-bottom:1rem;}
+
+    /* Footer */
+    footer {
+      background-color: #19528b;
+      color: white;
+      padding: 8px 0;   /* smaller footer */
+      font-size: 13px;
+      text-align: center;
+      margin-top: auto;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container nav-wrap">
-      <a class="brand" href="index.html">
-        <img src="logo.jpg" alt="TravelSphere Hub logo" class="logo-img">
-        <span class="brand-text">TravelSphere Hub</span>
-      </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Open navigation">☰</button>
-      <nav class="nav" id="mainNav">
-        <a href="index.html">Home</a>
-        <a href="destination.html">Destinations</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg custom-navbar fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand logo-text" href="index.html">TravelSphere Hub 🌍</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="C:\Users\dell\Documents\vs code\travelsphere\frontend\destination.html">Destinations</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+      </ul>
     </div>
-  </header>
+  </div>
+</nav>
 
-  <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-overlay"></div>
-      <div class="container hero-content">
-        <h1 class="hero-title">✈️🌍 Sphere Up Your Travel Game 🌟🧳</h1>
-        <p class="hero-tag">From tropical beaches to snowy mountains, explore the places that inspire you to travel.</p>
-        <a class="btn primary-btn" href="destinations.html">Start Exploring</a>
-      </div>
-    </section>
+<!-- Hero Section -->
+<section class="parallax bg1" id="Home">
+  <div class="content">
+    <h1>✈🌍 Sphere Up Your Travel Game 🌟🧳</h1>
+    <p>From tropical beaches to snowy mountains, explore the places that inspire you to travel.</p>
+  </div>
+</section>
 
-    <!-- Why we built it -->
-    <section class="why container fade-up">
-      <h2>Why TravelSphere Hub?</h2>
-      <p>We believe travel transforms lives. TravelSphere Hub brings curated destinations, honest offers, and helpful tools — for explorers who want beautiful, reliable trips without the fuss.</p>
-      <br>
-      <div class="reasons-grid">
-        <article class="reason">
-          <h3>Curated Destinations</h3>
-          <p>Handpicked places—from hidden gems to world-class favourites—so you spend time enjoying, not researching.</p>
-        </article>
-        <article class="reason">
-          <h3>Real Offers</h3>
-          <p>Clear, sensible deals with no surprises. We highlight value-for-money packages and seasonal discounts.</p>
-        </article>
-        <article class="reason">
-          <h3>Personalised Support</h3>
-          <p>Tips and contact support so planning is simple. Use the contact page to get in touch anytime.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- About short -->
-    <section class="about-preview container fade-up">
-      <h2>About Us</h2>
-      <p>TravelSphere Hub was created to make travel approachable. Our mission: inspire and enable memorable journeys with responsible travel choices and transparent information.</p>
-      <a class="btn ghost-btn" href="about.html">Learn More</a>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>© 2025 TravelSphere Hub • Built with care • All rights reserved</p>
+<!-- Destinations -->
+<section class="destinations" id="Destinations">
+  <h2>Popular Destinations</h2>
+  <div class="cards">
+    <div class="card">
+      <img src="paris.jpg" alt="Paris">
+      <h3>Paris</h3>
+      <p>The city of lights & love awaits you.</p>
     </div>
-  </footer>
+    <div class="card">
+      <img src="bali.jpg" alt="Bali">
+      <h3>Bali</h3>
+      <p>Tropical paradise for your soul.</p>
+    </div>
+    <div class="card">
+      <img src="new-york.jpg" alt="New York">
+      <h3>New York</h3>
+      <p>The city that never sleeps.</p>
+    </div>
+  </div>
+  <div class="explore-more">
+    <a href="more_desti.html" class="explore-btn">Explore More</a>
+  </div>
+</section>
 
-  <script src="script.js"></script>
+<!-- Parallax Section -->
+<section class="parallax bg2">
+  <div class="content">
+    <h1>Adventure Awaits</h1>
+    <p>Step out and live the moments you will cherish forever.</p>
+  </div>
+</section>
+
+<!-- About -->
+<section class="parallax bg2" id="About">
+  <div class="about-home">
+    <h2>About TravelSphere Hub</h2>
+    <p><em>Travel not to escape life, but so life doesn’t escape you.</em></p>
+    <p>At <strong>TravelSphere Hub</strong>, we craft journeys filled with stories, laughter, and memories. 
+       We bring you the best destinations, insider tips, and deals to make every trip unforgettable.</p>
+    <a class="explore-btn" href="about.html">Learn More</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <p>© 2025 TravelSphere Hub | All rights reserved</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
