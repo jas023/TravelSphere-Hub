@@ -4,112 +4,363 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>TravelSphere Hub — Destinations</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root{
+      --brand:#0a2a66;           /* dark blue */
+      --brand-2:#083054;         /* darker hover */
+      --accent:#ff8800;          /* for arrows/toast */
+      --bg:#f4f7ff;              /* contrasting background */
+      --card:#ffffff;
+      --shadow:0 6px 18px rgba(0,0,0,.08);
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background: var(--bg);
+      color:#1c1c1c;
+      overflow-x:hidden;
+      padding-bottom:38px; /* space for fixed footer */
+    }
+
+    /* Header (Navbar) */
+    .site-header{
+      position:sticky; top:0; z-index:20;
+      background:var(--brand);
+      box-shadow: 0 2px 10px rgba(0,0,0,.15);
+    }
+    .nav-wrap{
+      max-width:1200px; margin:0 auto;
+      padding:.75rem 1rem;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .brand{display:flex; align-items:center; gap:.6rem; text-decoration:none; color:#fff}
+    .brand-text{font-weight:700; letter-spacing:.2px}
+    .logo-img{height:28px}
+    .nav a{
+      text-decoration:none; color:#fff; font-weight:600; margin-left:14px;
+      padding:.35rem .6rem; border-radius:8px; transition:.2s;
+    }
+    .nav a:hover{ background: rgba(255,255,255,.12) }
+
+    /* Slider layout (kept exactly like your structure) */
+    .slider-wrapper{ display:flex; overflow-x:hidden; scroll-behavior:smooth; }
+    .slide{ flex:0 0 100%; padding:1.5rem 1rem; }
+    .slide h2{ margin:0 0 .75rem }
+
+    /* Container widths for content blocks */
+    .dest-grid, .offers-grid, .fav-grid{
+      max-width:1200px; margin: 0 auto;
+      display:grid; gap:1rem;
+    }
+
+    /* Cards */
+    .dest-grid{
+      grid-template-columns: repeat(auto-fit, minmax(230px,1fr));
+    }
+    .card{
+      background:var(--card); border-radius:var(--radius); overflow:hidden;
+      box-shadow: var(--shadow);
+      display:flex; flex-direction:column;
+      transition:transform .2s ease;
+    }
+    .card:hover{ transform: translateY(-4px) }
+    .card img{ width:100%; height:160px; object-fit:cover; display:block }
+    .card-body{ padding:.9rem 1rem }
+    .card-body h3{ margin:.1rem 0 .25rem; font-size:1.05rem }
+    .card-body p{ margin:0; color:#555; font-size:.95rem }
+
+    /* Card actions (Fav/Share) */
+    .card-actions{
+      display:flex; gap:.5rem; padding:.6rem 1rem 1rem;
+    }
+    .icon-btn{
+      border:none; background:#eef3ff; color:#26324d; cursor:pointer;
+      padding:.45rem .7rem; border-radius:999px; font-size:.95rem; font-weight:600;
+      transition:.2s;
+    }
+    .icon-btn:hover{ background:#dfe9ff }
+    .icon-btn.fav.active{ background:#ffe2e7; color:#c4143a }
+
+    /* Offers */
+    .offers-grid{
+      grid-template-columns: repeat(auto-fit, minmax(230px,1fr));
+    }
+    .offer-card{
+      background:var(--card); border-radius:var(--radius); padding:1rem;
+      box-shadow: var(--shadow);
+    }
+    .offer-card h3{ margin:.2rem 0 .4rem }
+    .offer-card p{ margin:0; color:#555 }
+    .offer-btn{ text-align:center; margin:1rem auto 0 }
+    .book-btn{
+      background:var(--brand); color:#fff; border:none; cursor:pointer;
+      padding:.7rem 1.2rem; border-radius:10px; font-weight:700; letter-spacing:.2px;
+    }
+    .book-btn:hover{ background:var(--brand-2) }
+
+    /* Favorites section */
+    #favourites .empty-msg{ text-align:center; color:#666; margin:1rem 0 }
+    #favGrid{ max-width:1200px; margin:0 auto }
+
+    /* Slider controls (arrows) */
+    .slider-controls{
+      position:fixed; left:0; right:0; bottom:56px; /* sits above footer */
+      display:flex; justify-content:center; gap:.6rem; z-index:15;
+    }
+    .slider-controls button{
+      background:var(--accent); color:#fff; border:none; cursor:pointer;
+      width:42px; height:42px; border-radius:50%; font-size:1.1rem; font-weight:700;
+      box-shadow: 0 6px 14px rgba(255,136,0,.35);
+      transition: transform .1s ease-in-out;
+    }
+    .slider-controls button:active{ transform: scale(.95) }
+
+    /* Footer (tiny & edge-to-edge) */
+    .site-footer{
+      position:fixed; left:0; right:0; bottom:0; z-index:10;
+      background:var(--brand); color:#cfd8ff;
+      padding:.35rem .75rem; font-size:.8rem; text-align:center;
+    }
+
+    /* Toast for "Link copied!" */
+    .toast{
+      position:fixed; bottom:96px; left:50%; transform:translateX(-50%);
+      background:#1f1f1f; color:#fff; padding:.55rem .9rem; border-radius:999px;
+      font-size:.9rem; opacity:0; pointer-events:none; transition:.25s ease;
+      box-shadow:0 8px 18px rgba(0,0,0,.25); z-index:25;
+    }
+    .toast.show{ opacity:1 }
+
+    /* Floating emojis moving around screen */
+    .emoji{
+      position:fixed; z-index:0; font-size:2.2rem; opacity:.18; pointer-events:none;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,.08));
+      will-change: transform;
+    }
+
+    /* Small tweaks for narrow screens */
+    @media (max-width:520px){
+      .card img{ height:140px }
+      .slider-controls{ bottom:62px }
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header alt">
-    <div class="container nav-wrap">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="nav-wrap">
       <a class="brand" href="index.html">
         <img src="logo.svg" alt="TravelSphere Hub logo" class="logo-img">
         <span class="brand-text">TravelSphere Hub</span>
       </a>
-      <button class="nav-toggle" id="navToggle2" aria-label="Open navigation">☰</button>
       <nav class="nav" id="mainNav2">
         <a href="#trending">Trending</a>
         <a href="#favourites">Favourites</a>
         <a href="#offers">Offers</a>
-        <a href="index.html">Back to Home</a>
+        <a href="about
+        .html">About</a>
       </nav>
     </div>
   </header>
 
-  <main>
-    <section id="trending" class="container section-top fade-up">
-      <h2>Trending Destinations</h2>
+  <!-- Floating emojis are injected by JS -->
+
+  <!-- Horizontal Slider (unchanged structure) -->
+  <main class="slider-wrapper" id="slider">
+    <!-- Trending -->
+    <section id="trending" class="slide">
+      <h2>🌟 Trending Destinations</h2>
       <div class="dest-grid" id="trendingGrid">
-        <!-- Cards are inserted in HTML for demo; JS wires favorites & share behavior -->
-        <article class="card" data-id="paris">
-          <img src="https://source.unsplash.com/600x400/?paris" alt="Paris">
-          <div class="card-body">
-            <h3>Paris, France</h3>
-            <p>City of lights, pastries and culture.</p>
-            <div class="card-actions">
-              <button class="icon-btn favorite-btn" aria-label="Add to favourites">♡</button>
-              <button class="icon-btn share-btn" aria-label="Share">⇪</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="card" data-id="maldives">
-          <img src="https://source.unsplash.com/600x400/?maldives" alt="Maldives">
-          <div class="card-body">
-            <h3>Maldives</h3>
-            <p>Turquoise waters and island resorts.</p>
-            <div class="card-actions">
-              <button class="icon-btn favorite-btn">♡</button>
-              <button class="icon-btn share-btn">⇪</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="card" data-id="tokyo">
-          <img src="https://source.unsplash.com/600x400/?tokyo" alt="Tokyo">
-          <div class="card-body">
-            <h3>Tokyo, Japan</h3>
-            <p>Vibrant, modern and steeped in tradition.</p>
-            <div class="card-actions">
-              <button class="icon-btn favorite-btn">♡</button>
-              <button class="icon-btn share-btn">⇪</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="card" data-id="bali">
-          <img src="https://source.unsplash.com/600x400/?bali" alt="Bali">
-          <div class="card-body">
-            <h3>Bali, Indonesia</h3>
-            <p>Beaches, culture and yoga retreats.</p>
-            <div class="card-actions">
-              <button class="icon-btn favorite-btn">♡</button>
-              <button class="icon-btn share-btn">⇪</button>
-            </div>
-          </div>
-        </article>
+        <!-- BIG LIST (each with Fav/Share) -->
+        <!-- Row 1 -->
+        <article class="card" data-id="paris"><img src="paris.jpg" alt="Paris"><div class="card-body"><h3>Paris, France</h3><p>City of lights, pastries and culture.</p></div><div class="card-actions"><button class="icon-btn fav">❤️ Fav</button><button class="icon-btn share">📤 Share</button></div></article>
+        <article class="card" data-id="tokyo"><img src="tokyo.jpg" alt="Tokyo"><div class="card-body"><h3>Tokyo, Japan</h3><p>Neon nights & ancient temples.</p></div><div class="card-actions"><button class="icon-btn fav">❤️ Fav</button><button class="icon-btn share">📤 Share</button></div></article>
+        <article class="card" data-id="bali"><img src="bali.jpg" alt="Bali"><div class="card-body"><h3>Bali, Indonesia</h3><p>Beaches, culture and yoga retreats.</p></div><div class="card-actions"><button class="icon-btn fav">❤️ Fav</button><button class="icon-btn share">📤 Share</button></div></article>
+        <article class="card" data-id="rome"><img src="thailand.jpg" alt="Thailand"><div class="card-body"><h3>Thailand</h3><p>Land of free.</p></div><div class="card-actions"><button class="icon-btn fav">❤️ Fav</button><button class="icon-btn share">📤 Share</button></div></article>
+        <!-- Row 2 -->
+        <article class="card" data-id="newyork"><img src="new-york.jpg" alt="New York"><div class="card-body"><h3>New York, USA</h3><p>The city that never sleeps.</p></div><div class="card-actions"><button class="icon-btn fav">❤️ Fav</button><button class="icon-btn share">📤 Share</button></div></article>
+        <article class="card" data-id="sydney"><img src="australia.jpg" alt="Sydney"><div class="card-body"><h3>Sydney, Australia</h3><p>Harbour views & Opera House.</p></div><div class="card-actions"><button class="icon-btn fav">❤️ Fav</button><button class="icon-btn share">📤 Share</button></div></article>
+        <article class="card" data-id="dubai"><img src="dubai" alt="Dubai"><div class="card-body"><h3>Dubai</h3><p>Modern, luxurious and cosmopolitan.</p></div><div class="card-actions"><button class="icon-btn fav">❤️ Fav</button><button class="icon-btn share">📤 Share</button></div></article>
+        <article class="card" data-id="london"><img src="london.jpg" alt="London"><div class="card-body"><h3>London, UK</h3><p>Royal palaces & markets.</p></div><div class="card-actions"><button class="icon-btn fav">❤️ Fav</button><button class="icon-btn share">📤 Share</button></div></article>
+        <!-- Row 3 -->
+        <!-- <article class="card" data-id="barcelona"><img src="https://source.unsplash.com/600x400/?barcelona" alt="Barcelona"><div class="card-body"><h3>Barcelona, Spain</h3><p>Gaudí art & sunny beaches.</p></div><div class="card-actions"><button class="icon-btn fav">❤️ Fav</button><button class="icon-btn share">📤 Share</button></div></article> -->
+        <article class="card" data-id="singapore"><img src="singapore.jpg" alt="Singapore"><div class="card-body"><h3>Singapore</h3><p>Futuristic skyline & hawker food.</p></div><div class="card-actions"><button class="icon-btn fav">❤️ Fav</button><button class="icon-btn share">📤 Share</button></div></article>
+        <article class="card" data-id="bangkok"><img src="bangkok.jpg" alt="Bangkok"><div class="card-body"><h3>Bangkok, Thailand</h3><p>Street food & golden temples.</p></div><div class="card-actions"><button class="icon-btn fav">❤️ Fav</button><button class="icon-btn share">📤 Share</button></div></article>
+        <article class="card" data-id="switzerland"><img src="switzerland.jpg" alt="Istanbul"><div class="card-body"><h3>switzerland</h3><p>Mountanious, alps, diverse culture.</p></div><div class="card-actions"><button class="icon-btn fav">❤️ Fav</button><button class="icon-btn share">📤 Share</button></div></article>
+        
+         <br>
+         <h4 style="text-align: center;">Within country picks</h4>
+         <br>
+         <br>
+         <br>
+         <br>
+        <article class="card" data-id="goa"><img src="https://source.unsplash.com/600x400/?goa,beach" alt="Goa"><div class="card-body"><h3>Goa, India</h3><p>Sun, sand & shacks.</p></div><div class="card-actions"><button class="icon-btn fav">❤️ Fav</button><button class="icon-btn share">📤 Share</button></div></article>
+        <br>
+        <article class="card" data-id="manali"><img src="https://source.unsplash.com/600x400/?manali" alt="Manali"><div class="card-body"><h3>Manali, India</h3><p>Himalayan valleys & snow.</p></div><div class="card-actions"><button class="icon-btn fav">❤️ Fav</button><button class="icon-btn share">📤 Share</button></div></article>
+        <article class="card" data-id="jaipur"><img src="https://source.unsplash.com/600x400/?jaipur" alt="Jaipur"><div class="card-body"><h3>Jaipur, India</h3><p>Pink city forts & bazaars.</p></div><div class="card-actions"><button class="icon-btn fav">❤️ Fav</button><button class="icon-btn share">📤 Share</button></div></article>
+        <article class="card" data-id="kerala"><img src="https://source.unsplash.com/600x400/?kerala,backwaters" alt="Kerala"><div class="card-body"><h3>Kerala, India</h3><p>Backwaters & greenery.</p></div><div class="card-actions"><button class="icon-btn fav">❤️ Fav</button><button class="icon-btn share">📤 Share</button></div></article>
       </div>
     </section>
 
-    <section id="favourites" class="container section-top fade-up">
-      <h2>Your Favourites</h2>
+    <!-- Favourites -->
+    <section id="favourites" class="slide">
+      <h2>❤️ Your Favourites</h2>
       <p class="empty-msg" id="favEmpty">You haven't added any favourites yet.</p>
       <div class="dest-grid" id="favGrid"></div>
     </section>
 
-    <section id="offers" class="container section-top fade-up">
-      <h2>Special Offers</h2>
+    <!-- Offers -->
+    <section id="offers" class="slide">
+      <h2>💎 Special Offers</h2>
       <div class="offers-grid">
-        <article class="offer-card">
-          <h3>Bali Relax Package</h3>
-          <p>4 nights • Price from $399 • Save 20%</p>
-        </article>
-        <article class="offer-card">
-          <h3>European Classics</h3>
-          <p>7 nights across Paris & Rome • Price from $749 • Early-bird 15% off</p>
-        </article>
-        <article class="offer-card">
-          <h3>Dubai Weekend</h3>
-          <p>3 nights • Price from $299 • Includes desert safari</p>
-        </article>
+        <article class="offer-card"><h3>Bali Relax Package</h3><p>4 nights • from ₹30,000 • Save 20%</p></article>
+        <!-- <article class="offer-card"><h3>European Classics</h3><p>7 nights Paris & Rome • from $749 • Early-bird 15% off</p></article> -->
+        <article class="offer-card"><h3>Dubai package</h3><p>5 nights • from ₹50,000 • Desert safari included</p></article>
+        <article class="offer-card"><h3>Switzerland outing</h3><p>5 nights • from ₹1,00,000 • Early-bird 12.5% off</p></article>
+        <article class="offer-card"><h3>Tokyo Adventure</h3><p>6 nights • from ₹90,000 • Mt. Fuji day trip</p></article>
+        <!-- <article class="offer-card"><h3>Sydney Escape</h3><p>5 nights • from $699 • Opera House tour</p></article> -->
+        <!-- <article class="offer-card"><h3>Egyptian Treasures</h3><p>6 nights • from $799 • Guided pyramids tour</p></article> -->
+        <article class="offer-card"><h3>Goa Beach Break</h3><p>4 nights • from ₹25,999 • Breakfast & transfers</p></article>
+        <!-- <article class="offer-card"><h3>Honeymoon Santorini</h3><p>5 nights • from €1,199 • Sunset cruise</p></article> -->
+        <article class="offer-card"><h3>Kerala Backwaters</h3><p>3 nights • from ₹22,499 • Houseboat stay</p></article>
+      </div>
+      <div class="offer-btn">
+        <a href="contact.html"><button class="book-btn">📩 Plan Your Trip</button></a>
       </div>
     </section>
   </main>
 
+  <!-- Slider Controls -->
+  <div class="slider-controls">
+    <button id="prevBtn" aria-label="Previous">⬅</button>
+    <button id="nextBtn" aria-label="Next">➡</button>
+  </div>
+
+  <!-- Footer -->
   <footer class="site-footer">
-    <div class="container">
-      <p>© 2025 TravelSphere Hub • Made with ♥</p>
-    </div>
+    <p>© 2025 TravelSphere Hub • Made with ♥</p>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Toast -->
+  <div class="toast" id="toast">Link copied!</div>
+
+  <script>
+    /* -------- Slider arrows (kept behavior) -------- */
+    const slider = document.querySelector(".slider-wrapper");
+    const nextBtn = document.getElementById("nextBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    let index = 0;
+    const slides = document.querySelectorAll(".slide");
+
+    function updateSlider() {
+      slider.scrollTo({ left: slides[index].offsetLeft, behavior: "smooth" });
+    }
+    nextBtn.addEventListener("click", () => { index = (index + 1) % slides.length; updateSlider(); });
+    prevBtn.addEventListener("click", () => { index = (index - 1 + slides.length) % slides.length; updateSlider(); });
+
+    /* -------- Fav + Share on cards -------- */
+    const favGrid = document.getElementById('favGrid');
+    const favEmpty = document.getElementById('favEmpty');
+
+    function slugify(text){ return text.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+
+    // Delegate clicks for performance
+    document.getElementById('trendingGrid').addEventListener('click', function(e){
+      const btn = e.target.closest('.icon-btn');
+      if(!btn) return;
+      const card = e.target.closest('.card');
+      const title = card.querySelector('h3')?.textContent || 'destination';
+      const id = card.dataset.id || slugify(title);
+
+      // Favorite toggle
+      if(btn.classList.contains('fav')){
+        btn.classList.toggle('active');
+        if(btn.classList.contains('active')){
+          // add to favourites
+          const clone = card.cloneNode(true);
+          // Remove action handlers inside clone and set as static (optional)
+          clone.querySelectorAll('.icon-btn').forEach(b => b.remove());
+          clone.dataset.source = id;
+          favGrid.appendChild(clone);
+        }else{
+          // remove from favourites by data-source
+          const toRemove = favGrid.querySelector(`.card[data-source="${id}"]`);
+          if(toRemove) toRemove.remove();
+        }
+        favEmpty.style.display = favGrid.children.length ? 'none' : 'block';
+      }
+
+      // Share -> copy link + toast
+      if(btn.classList.contains('share')){
+        const link = `${location.origin}${location.pathname}#${id}`;
+        navigator.clipboard?.writeText(link).catch(()=>{});
+        showToast('Link copied!');
+      }
+    });
+
+    /* -------- Toast helper -------- */
+    const toast = document.getElementById('toast');
+    let toastTimer = null;
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=>toast.classList.remove('show'), 1400);
+    }
+
+    /* -------- Floating emojis all around the screen -------- */
+    const EMOJIS = ["✈️","🌍","🏖️","🏔️","🛶","🗺️","🗽","🎡","🕌","🚢","🧳"];
+    const COUNT = 18; // number of floating emojis
+
+    function spawnEmoji(){
+      const el = document.createElement('div');
+      el.className = 'emoji';
+      el.textContent = EMOJIS[Math.floor(Math.random()*EMOJIS.length)];
+      el.style.left = Math.random()*100 + 'vw';
+      el.style.top  = Math.random()*100 + 'vh';
+      // velocity in px per frame
+      el.dataset.vx = (Math.random()*1.6 - 0.8).toFixed(2);   // -0.8..0.8
+      el.dataset.vy = (Math.random()*1.6 - 0.8).toFixed(2);
+      el.style.fontSize = (1.8 + Math.random()*1.6) + 'rem';
+      document.body.appendChild(el);
+      return el;
+    }
+
+    const floaters = Array.from({length:COUNT}, spawnEmoji);
+
+    function tick(){
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      floaters.forEach(el=>{
+        let x = el.offsetLeft;
+        let y = el.offsetTop;
+        let vx = parseFloat(el.dataset.vx);
+        let vy = parseFloat(el.dataset.vy);
+        x += vx*3; y += vy*3;
+
+        // wrap around edges
+        if(x < -60) x = w + 20;
+        if(x > w + 60) x = -20;
+        if(y < -60) y = h + 20;
+        if(y > h + 60) y = -20;
+
+        el.style.transform = `translate(${x - el.offsetLeft}px, ${y - el.offsetTop}px)`;
+        el.style.left = x + 'px';
+        el.style.top  = y + 'px';
+
+        // small random drift
+        if(Math.random()<0.01){
+          el.dataset.vx = (parseFloat(el.dataset.vx) + (Math.random()*0.4 - 0.2)).toFixed(2);
+          el.dataset.vy = (parseFloat(el.dataset.vy) + (Math.random()*0.4 - 0.2)).toFixed(2);
+        }
+      });
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  </script>
 </body>
 </html>
-
