@@ -8,14 +8,14 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #add2ea;
+      background: #a8c9df;
       color: #333;
       overflow-x: hidden;
     }
 
     /* Navbar */
     .site-header {
-      background: #0077b6;
+      background: #7db3d1;
       padding: 15px 20px;
       color: white;
       position: sticky;
@@ -148,6 +148,144 @@
       font-size: 0.9rem;
       margin-top: 40px;
     }
+    .container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 0 20px;
+}
+@media (max-width: 600px) {
+  .container {
+    padding: 0 5px;
+    max-width: 100%;
+  }
+}
+.contact-form {
+  max-width: 500px;
+  width: 100%;
+  margin: 30px auto 0 auto;
+  padding: 15px;
+  box-sizing: border-box;
+}
+@media (max-width: 500px) {
+  .contact-form {
+    max-width: 100%;
+    margin: 15px auto;
+    padding: 5px;
+  }
+}
+@media (max-width: 400px) {
+  .floating { display: none; }
+}
+.floating {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.7;
+  animation: float 8s infinite;
+  z-index: 1002; /* increase above header/main/form */
+}
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 0 20px;
+}
+@media (max-width: 600px) {
+  .container {
+    padding: 0 5px;
+    max-width: 100%;
+  }
+}
+
+.contact-form {
+  max-width: 500px;
+  width: 100%;
+  margin: 30px auto 0 auto;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+/* For mobile screens */
+@media (max-width: 500px) {
+  .contact-form {
+    max-width: 100%;
+    margin: 15px auto;
+    padding: 10px;
+  }
+}
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 0 20px;
+}
+@media (max-width: 600px) {
+  .container {
+    padding: 0 5px;
+    max-width: 100%;
+  }
+}
+.contact-form {
+  max-width: 500px;
+  width: 100%;
+  margin: 30px auto 0 auto;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+/* For mobile screens */
+@media (max-width: 500px) {
+  .contact-form {
+    max-width: 100%;
+    margin: 15px auto;
+    padding: 10px;
+  }
+}
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 0 20px;
+}
+@media (max-width: 600px) {
+  .container {
+    padding: 0 5px;
+    max-width: 100%;
+  }
+}
+@media (max-width: 400px) {
+  .floating { display: none; }
+}
+.floating {
+  position: fixed;           /* Use 'fixed' for global placement */
+  font-size: 2rem;
+  opacity: 0.7;
+  animation: float 8s infinite;
+  z-index: 1002;             /* Make sure it’s above content */
+  pointer-events: none;      /* Prevents emoji clicks/touches */
+}
+
+
+@media (max-width: 500px) {
+  .contact-form {
+    max-width: 100%;
+    margin: 15px auto;
+    padding: 5px;
+  }
+}
+
+/* Floating emoji: keep visible and above form */
+.floating {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.7;
+  animation: float 8s infinite;
+  z-index: 1002;
+}
+
+/* Optionally, only hide emojis on extremely narrow screens */
+@media (max-width: 330px) {
+  .floating {
+    display: none;
+  }
+}
+
 
     /* Animations */
     @keyframes fadeIn {
@@ -158,6 +296,53 @@
       from { opacity: 0; transform: translateY(50px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    .menu-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+    flex-direction: column;
+    background: #7db3d1;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    z-index: 1001;
+  }
+  .nav.active {
+    display: flex;
+  }
+  .menu-toggle {
+    display: block;
+  }
+}
+@media (max-width: 500px) {
+  .contact-form {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  main {
+    padding: 30px 10px;
+  }
+  main h1 {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 400px) {
+  .floating {
+    display: none;
+  }
+}
+
+
   </style>
 </head>
 <body>
@@ -167,14 +352,20 @@
   <div class="floating" style="left: 20%; top: 70%; animation-delay: 4s;">📍</div>
   <div class="floating" style="left: 70%; top: 60%; animation-delay: 6s;">🌍</div>
   <div class="floating" style="left: 50%; top: 10%; animation-delay: 3s;">📅</div>
+  <div class="floating" style="left: 5%; top: 80%; animation-delay: 3s;">📱</div>
+  <div class="floating" style="left: 90%; top: 80%; animation-delay: 3s;">🌐</div>
+    <div class="floating" style="left: 50%; top: 10%; animation-delay: 3s;">✉️</div>
+
 
   <!-- Navbar -->
   <header class="site-header">
     <div class="container nav-wrap">
       <a class="brand" href="index.html">
-        <img src="logo.svg" alt="logo">
+        <img src="logo.jpg" alt="logo">
         <span class="brand-text">TravelSphere Hub</span>
       </a>
+      <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
+
       <nav class="nav">
         <a href="index.html">Home</a>
         <a href="destination.html">Destinations</a>
@@ -218,5 +409,12 @@
       <p>© 2025 TravelSphere Hub</p>
     </div>
   </footer>
+
+  <script>
+    document.querySelector('.menu-toggle').addEventListener('click', () => {
+  document.querySelector('.nav').classList.toggle('active');
+});
+
+  </script>
 </body>
 </html>
